@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "name": "Fantasy"
+  },
+  {
+    "id": "2",
+    "name": "Adventure"
+  },
+  {
+    "id": "3",
+    "name": "Mystery"
+  },
+  {
+    "id": "4",
+    "name": "Thriller"
+  },
+  {
+    "id": "5",
+    "name": "Science Fiction"
+  },
+  {
+    "id": "6",
+    "name": "Drama"
+  },
+  {
+    "id": "7",
+    "name": "Horror"
+  }
+]

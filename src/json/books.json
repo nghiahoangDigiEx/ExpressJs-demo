@@ -1,0 +1,156 @@
+[
+  {
+    "id": "1",
+    "name": "Harry Potter and the Philosopher's Stone",
+    "authorId": "1",
+    "categoryIds": [
+      "1",
+      "2"
+    ],
+    "content": "A young wizard begins his magical journey at Hogwarts.",
+    "publishedDate": "1997-06-26",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "2",
+    "name": "Harry Potter and the Chamber of Secrets",
+    "authorId": "1",
+    "categoryIds": [
+      "1",
+      "2"
+    ],
+    "content": "Harry returns to Hogwarts and uncovers a dark secret.",
+    "publishedDate": "1998-07-02",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "3",
+    "name": "A Game of Thrones",
+    "authorId": "2",
+    "categoryIds": [
+      "1",
+      "6"
+    ],
+    "content": "Noble families battle for control of the Iron Throne.",
+    "publishedDate": "1996-08-06",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "4",
+    "name": "A Clash of Kings",
+    "authorId": "2",
+    "categoryIds": [
+      "1",
+      "6"
+    ],
+    "content": "The struggle for power intensifies across Westeros.",
+    "publishedDate": "1998-11-16",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "5",
+    "name": "The Fellowship of the Ring",
+    "authorId": "3",
+    "categoryIds": [
+      "1",
+      "2"
+    ],
+    "content": "A hobbit embarks on a quest to destroy a powerful ring.",
+    "publishedDate": "1954-07-29",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "6",
+    "name": "The Two Towers",
+    "authorId": "3",
+    "categoryIds": [
+      "1",
+      "2"
+    ],
+    "content": "The fellowship is broken but the quest continues.",
+    "publishedDate": "1954-11-11",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "7",
+    "name": "Murder on the Orient Express",
+    "authorId": "4",
+    "categoryIds": [
+      "3"
+    ],
+    "content": "Detective Hercule Poirot investigates a murder on a train.",
+    "publishedDate": "1934-01-01",
+    "createdDate": "2025-06-12"
+  },
+  {
+    "id": "8",
+    "name": "And Then There Were None",
+    "authorId": "4",
+    "categoryIds": [
+      "3",
+      "4"
+    ],
+    "content": "Ten strangers are invited to an isolated island.",
+    "publishedDate": "1939-11-06",
+    "createdDate": "2025-06-11"
+  },
+  {
+    "id": "9",
+    "name": "The Da Vinci Code",
+    "authorId": "5",
+    "categoryIds": [
+      "4",
+      "3"
+    ],
+    "content": "A symbologist uncovers a centuries-old conspiracy.",
+    "publishedDate": "2003-03-18",
+    "createdDate": "2025-06-13"
+  },
+  {
+    "id": "10",
+    "name": "Angels & Demons",
+    "authorId": "5",
+    "categoryIds": [
+      "4",
+      "3"
+    ],
+    "content": "A scientist's murder leads to a race against time.",
+    "publishedDate": "2000-05-01",
+    "createdDate": "2025-06-11"
+  },
+  {
+    "id": "11",
+    "name": "Book",
+    "authorId": "1",
+    "categoryIds": [
+      "1"
+    ],
+    "content": "Hahahaha",
+    "publishedDate": "1997-06-26",
+    "createdDate": "2026-06-15"
+  },
+  {
+    "id": "12",
+    "name": "Books",
+    "authorId": "2",
+    "categoryIds": [
+      "1",
+      "2"
+    ],
+    "content": "Hahahaha",
+    "publishedDate": "1997-06-28",
+    "createdDate": "2026-06-15"
+  },
+  {
+    "id": "13",
+    "name": "sách đỏ",
+    "authorId": "3",
+    "categoryIds": [
+      "1",
+      "3"
+    ],
+    "content": "Hahahaha",
+    "publishedDate": "2001-12-13",
+    "createdDate": "2026-06-15"
+  }
+]
