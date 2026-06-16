@@ -2,7 +2,7 @@ import { BookService } from "../../service/book-service.js";
 import { CreateBookDTO, UpdateBookDTO, CreateBookValidate, UpdateBookValidate, QueryBooksValidate, Book } from "../../interface/books.js";
 import { Request, Response } from "express";
 import {SortDate} from "../../constant/enums/sort-date.js";
-import { validate } from "../../validate/validate.js";
+import { validateBody, validateQuery } from "../../validate/validate.js";
 import {BookListResponse} from "../../interface/response/book-response.js";
 import {ApiResponse} from "../../interface/response/api-response.js";
 import {ErrorCustom} from "../../errors/ErrorCustom.js";
@@ -11,7 +11,7 @@ import {handleError} from "../../errors/HandleError.js";
 export const BookController = {
     getBooks: async (req: Request, res: Response): Promise<void> => {
         try {
-            validate(req.query, QueryBooksValidate);
+            validateQuery(req.query, QueryBooksValidate);
             const { categoryId, 
                 authorId, 
                 page = 1, 
@@ -52,7 +52,7 @@ export const BookController = {
 
     createBook: async (req: Request, res: Response): Promise<void> => {
         try {
-            validate(req.body, CreateBookValidate);
+            validateBody(req.body, CreateBookValidate);
             const bookData: CreateBookDTO = req.body;
             console.log(`Received book data: ${JSON.stringify(bookData)}`);
             const newBook = await BookService.createBook(bookData);
@@ -67,7 +67,7 @@ export const BookController = {
 
     updateBookById: async (req: Request, res: Response): Promise<void> => {
         try {
-            validate(req.body, UpdateBookValidate);
+            validateBody(req.body, UpdateBookValidate);
             const { id } = req.params as { id: string };
             
             const bookData: UpdateBookDTO = req.body;
