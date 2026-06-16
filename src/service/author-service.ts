@@ -1,5 +1,9 @@
 import {AuthorRepository} from "../repository/author-repository.js";
 import {Author, CreateAuthorDTO} from "../interface/authors.js";
+import {ErrorCustom} from "../errors/ErrorCustom.js";
+import {ErrorCode} from "../errors/ErrorCode.js";
+import { BookRepository } from "../repository/book-repository.js";
+
 
 export const AuthorService = {
     getAllAuthors: async(): Promise<Author[]> => {
@@ -14,7 +18,7 @@ export const AuthorService = {
         try{
             const author = await AuthorRepository.getAuthorById(id);
             if(!author){
-                throw new Error("Author not found");
+                throw new ErrorCustom("Author not found", ErrorCode.NOT_FOUND);
             }
             return author;
         }
@@ -29,6 +33,20 @@ export const AuthorService = {
         }
         catch(error){
             throw (error instanceof Error) ? error : new Error("Error creating author");
+        }
+    },
+
+    getBooksByAuthorId: async(authorId: string): Promise<any[]> => {
+        try{
+            const author = await AuthorRepository.getAuthorById(authorId);
+            if(!author){
+                throw new ErrorCustom("Author not found", ErrorCode.NOT_FOUND);
+            }
+            const books = await BookRepository.getAllBooks();
+            return books.filter(book => book.authorId === authorId);
+        }
+        catch(error){
+            throw (error instanceof Error) ? error : new Error("Error fetching books by author");
         }
     }
 }

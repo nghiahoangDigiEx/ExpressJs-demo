@@ -1,15 +1,12 @@
-import { BaseResponse } from "./base.js";
-export interface AuthorResponse extends BaseResponse {
+export interface AuthorResponse {
     data: {
         id: string;
         name: string;
-        createdDate: string;
     }
 }
-export interface AuthorListResponse extends BaseResponse {
+export interface AuthorListResponse {
     data: {
         id: string;
         name: string;
-        createdDate: string;
     }[],    
 }

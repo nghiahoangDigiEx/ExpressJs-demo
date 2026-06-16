@@ -1,4 +1,4 @@
-import { SortDate } from "../enums/sort-date.js";
+import { SortDate } from "../constant/enums/sort-date.js";
 
 export type CreateBookDTO = Omit<Book, "id" | "createdDate">;
 export type UpdateBookDTO = Partial<Omit<Book, "id" | "createdDate">>;

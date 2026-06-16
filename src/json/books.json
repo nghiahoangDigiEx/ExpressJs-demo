@@ -1,41 +1,5 @@
 [
   {
-    "id": "1",
-    "name": "Harry Potter and the Philosopher's Stone",
-    "authorId": "1",
-    "categoryIds": [
-      "1",
-      "2"
-    ],
-    "content": "A young wizard begins his magical journey at Hogwarts.",
-    "publishedDate": "1997-06-26",
-    "createdDate": "2025-06-12"
-  },
-  {
-    "id": "2",
-    "name": "Harry Potter and the Chamber of Secrets",
-    "authorId": "1",
-    "categoryIds": [
-      "1",
-      "2"
-    ],
-    "content": "Harry returns to Hogwarts and uncovers a dark secret.",
-    "publishedDate": "1998-07-02",
-    "createdDate": "2025-06-12"
-  },
-  {
-    "id": "3",
-    "name": "A Game of Thrones",
-    "authorId": "2",
-    "categoryIds": [
-      "1",
-      "6"
-    ],
-    "content": "Noble families battle for control of the Iron Throne.",
-    "publishedDate": "1996-08-06",
-    "createdDate": "2025-06-12"
-  },
-  {
     "id": "4",
     "name": "A Clash of Kings",
     "authorId": "2",

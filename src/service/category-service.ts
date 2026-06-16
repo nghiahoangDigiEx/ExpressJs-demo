@@ -1,5 +1,7 @@
 import {Category, CreateCategoryDTO} from "../interface/categories.js";
 import {CategoryRepository} from "../repository/category-repository.js";
+import {ErrorCustom} from "../errors/ErrorCustom.js";
+import {ErrorCode} from "../errors/ErrorCode.js";
 
 export const CategoryService = {
     getAllCategories: async(): Promise<Category[]> => {
@@ -15,7 +17,7 @@ export const CategoryService = {
         try{
             const category = await CategoryRepository.getCategoryById(id);
             if(!category){
-                throw new Error("Category not found");
+                throw new ErrorCustom("Category not found", ErrorCode.NOT_FOUND);
             }
             return category;
         }

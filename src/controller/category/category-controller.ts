@@ -1,15 +1,18 @@
 import {Category, CreateCategoryDTO} from "../../interface/categories.js";
 import {CategoryService} from "../../service/category-service.js";
 import {Request, Response} from "express";
+import {handleError} from "../../errors/HandleError.js";
+import {ApiResponse} from "../../interface/response/api-response.js";
 
 export const CategoryController = {
     getAllCategories: async (req: Request, res: Response): Promise<void> => {
         try{
             const categories: Category[] = await CategoryService.getAllCategories();
-            res.status(200).json(categories);
+            const response: ApiResponse<Category[]> = new ApiResponse(categories, "Categories fetched successfully");
+            res.status(200).json(response);
         }
         catch(error){
-            res.status(500).json({ message: error instanceof Error ? error.message : "Error fetching categories" });
+            handleError(error, res);
         }
     },
 
@@ -17,10 +20,11 @@ export const CategoryController = {
         try{
             const { id } = req.params as { id: string };
             const category: Category = await CategoryService.getCategoryById(id);
-            res.status(200).json(category);
+            const response: ApiResponse<Category> = new ApiResponse(category, "Category fetched successfully");
+            res.status(200).json(response);
         }
         catch(error){
-            res.status(500).json({ message: error instanceof Error ? error.message : "Error fetching category" });
+            handleError(error, res);
         }
     },
 
@@ -28,10 +32,11 @@ export const CategoryController = {
         try{
             const categoryData: CreateCategoryDTO = req.body;
             const newCategory = await CategoryService.createCategory(categoryData);
-            res.status(201).json(newCategory);
+            const response: ApiResponse<Category> = new ApiResponse(newCategory, "Category created successfully");
+            res.status(201).json(response);
         }
         catch(error){
-            res.status(500).json({ message: error instanceof Error ? error.message : "Error creating category" });
+            handleError(error, res);
         }
     }
 }

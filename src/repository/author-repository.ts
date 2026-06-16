@@ -1,17 +1,15 @@
 import fs from "fs/promises";
 import { Author, CreateAuthorDTO } from "../interface/authors.js";
 import { Environment } from "../config/environment.js";
+import { ErrorCustom } from "../errors/ErrorCustom.js";
+import { ErrorCode } from "../errors/ErrorCode.js";
 export const AuthorRepository = {
     getAuthorById: async(id: string): Promise<Author | null> => {
         try{
             const data = await fs.readFile(Environment.AUTHORS_FILE_PATH, "utf-8");
             console.log(`Reading authors file: ${data}`);
             const authors = JSON.parse(data) as Author[];
-            const author = authors.find(author => author.id === id);
-            if(!author){
-                throw new Error("Author not found");
-            }
-            return author;
+            return authors.find(author => author.id === id) || null;
         }
         catch(error){
             throw new Error("Error fetching author");
@@ -22,7 +20,7 @@ export const AuthorRepository = {
             const data = await fs.readFile(Environment.AUTHORS_FILE_PATH, "utf-8");
             console.log(`Reading authors file: ${data}`);
             if(!data){
-                throw new Error("No authors found");
+                throw new ErrorCustom("No authors found", ErrorCode.NOT_FOUND);
             }
             return JSON.parse(data) as Author[];
         }

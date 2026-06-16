@@ -3,9 +3,9 @@ import {CreateBookDTO, ListBooksDTO, UpdateBookDTO} from "../interface/books.js"
 import {Book} from "../interface/books.js";
 import {AuthorRepository} from "../repository/author-repository.js";
 import { CategoryRepository } from "../repository/category-repository.js";
-import { SortDate } from "../enums/sort-date.js";
-import {NotFoundError} from "../errors/NotFoundError.js";
-import { BadRequestError } from "../errors/BadRequestError.js";
+import { SortDate } from "../constant/enums/sort-date.js";
+import {ErrorCustom} from "../errors/ErrorCustom.js";
+import {ErrorCode} from "../errors/ErrorCode.js";
 
 
 export const BookService = {
@@ -26,7 +26,7 @@ export const BookService = {
                 filteredBooks = filteredBooks.filter(book => book.authorId === authorId);
             }
             if(filteredBooks.length === 0){
-                throw new NotFoundError("No books found");
+                throw new ErrorCustom("No books found", ErrorCode.NOT_FOUND);
             }
             if(sortPublishedDate!==undefined || sortCreatedDate!==undefined){
                 console.log(`Sorting books by published date: ${sortPublishedDate}, created date: ${sortCreatedDate}`);
@@ -34,7 +34,7 @@ export const BookService = {
             }
             const startIndex = (page - 1) * limit;
             if(startIndex >= filteredBooks.length){
-                throw new NotFoundError("Page number out of range");
+                throw new ErrorCustom("Page number out of range", ErrorCode.BAD_REQUEST);
             }
             const endIndex = startIndex + limit;
             filteredBooks = filteredBooks.slice(startIndex, endIndex);
@@ -54,26 +54,12 @@ export const BookService = {
         try{
             const book = await BookRepository.getBookById(id);
             if(!book){
-                throw new NotFoundError("Book not found");
+                throw new ErrorCustom("Book not found", ErrorCode.NOT_FOUND);
             }
             return book;
         }
         catch(error){
             throw (error instanceof Error) ? error : new Error("Error fetching book");
-        }
-    },
-
-    getBooksByAuthorId: async(authorId: string): Promise<Book[]> => {
-        try{
-            const books = await BookRepository.getAllBooks();
-            const filteredBooks = books.filter(book => book.authorId === authorId);
-            if(filteredBooks.length === 0){
-                throw new NotFoundError("No books found for this author");
-            }
-            return filteredBooks;
-        }
-        catch(error){
-            throw (error instanceof Error) ? error : new Error("Error fetching books by author");
         }
     },
 
@@ -83,17 +69,17 @@ export const BookService = {
             const author = await AuthorRepository.getAuthorById(book.authorId);
             console.log(`Author found: ${JSON.stringify(author)}`);
             if(!author){
-                throw new NotFoundError("Author not found");
+                throw new ErrorCustom("Author not found", ErrorCode.NOT_FOUND);
             }
             if(!book.categoryIds || book.categoryIds.length === 0){
-                throw new BadRequestError("At least one category is required");
+                throw new ErrorCustom("At least one category is required", ErrorCode.BAD_REQUEST);
             }
             console.log(`Validating categories: ${JSON.stringify(book.categoryIds)}`);
             const allcategories = await CategoryRepository.getAllCategories();
             for(const categoryId of book.categoryIds){
                 const category = allcategories.find(cat => cat.id === categoryId);
                 if(!category){
-                    throw new NotFoundError(`Category with ID ${categoryId} not found`);
+                    throw new ErrorCustom(`Category with ID ${categoryId} not found`, ErrorCode.NOT_FOUND);
                 }
             }
             console.log(`Creating book: ${JSON.stringify(book)}`);
@@ -110,7 +96,7 @@ export const BookService = {
         try{
             const book = await BookRepository.getBookById(id);
             if(!book){
-                throw new NotFoundError("Book not found");
+                throw new ErrorCustom("Book not found", ErrorCode.NOT_FOUND);
             }
             await BookRepository.deleteBookById(id);
             return "Book deleted successfully";
@@ -124,12 +110,12 @@ export const BookService = {
         try{
             const book = await BookRepository.getBookById(id);
             if(!book){
-                throw new NotFoundError("Book not found");
+                throw new ErrorCustom("Book not found", ErrorCode.NOT_FOUND);
             }
             if(updatedBook.authorId){
                 const author = await AuthorRepository.getAuthorById(updatedBook.authorId);
                 if(!author){
-                    throw new NotFoundError("Author not found");
+                    throw new ErrorCustom("Author not found", ErrorCode.NOT_FOUND);
                 }
             }
             if(updatedBook.categoryIds){
@@ -137,12 +123,12 @@ export const BookService = {
                 for(const categoryId of updatedBook.categoryIds){
                     const category = allcategories.find(cat => cat.id === categoryId);
                     if(!category){
-                        throw new NotFoundError(`Category with ID ${categoryId} not found`);
+                        throw new ErrorCustom(`Category with ID ${categoryId} not found`, ErrorCode.NOT_FOUND);
                     }
                 }
             }
             if(updatedBook.publishedDate && new Date(updatedBook.publishedDate) > new Date(book.createdDate)){
-                throw new Error("Published date cannot be after created date");
+                throw new ErrorCustom("Published date cannot be after created date", ErrorCode.BAD_REQUEST);
             }
             return BookRepository.updateBookById(id, updatedBook);
         }
@@ -155,7 +141,7 @@ export const BookService = {
         try{
             const book = await BookRepository.getBookById(id);
             if(!book || book.authorId !== authorId){
-                throw new NotFoundError("Book not found for this author");
+                throw new ErrorCustom("Book not found for this author", ErrorCode.NOT_FOUND);
             }  
             return book;
         }
